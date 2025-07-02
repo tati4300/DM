@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>Tatihsing DM</title>
+  <script>
+    if (localStorage.getItem("verified") !== "true") {
+      window.location.href = "https://tati4300.github.io/";
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, maximum-scale=5">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #eee;
+    }
+    .swiper {
+      width: 100vw;
+      height: 100vh;
+      background: #eee;
+    }
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+    .swiper-zoom-container img {
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+      background: #fff;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Swiper -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <!-- 圖片會自動插入這裡 -->
+    </div>
+    <!-- 分頁點 -->
+    <div class="swiper-pagination"></div>
+    <!-- 左右箭頭 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    // 你的圖片清單
+    const pages = [
+      "pages/en/01.jpg", "pages/en/02.jpg", "pages/en/03.jpg", "pages/en/04.jpg", "pages/en/05.jpg",
+      "pages/en/06.jpg", "pages/en/07.jpg", "pages/en/08.jpg", "pages/en/09.jpg", "pages/en/10.jpg","pages/en/11.jpg",
+      "pages/en/12.jpg", "pages/en/13.jpg", "pages/en/14.jpg", "pages/en/15.jpg", "pages/en/16.jpg",
+      "pages/en/17.jpg", "pages/en/18.jpg","pages/en/19.jpg", "pages/en/20.jpg", "pages/en/21.jpg", "pages/en/22.jpg"
+    ];
+
+    // 動態產生 Swiper Slide
+    const wrapper = document.querySelector('.swiper-wrapper');
+    pages.forEach(src => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      slide.innerHTML = `
+        <div class="swiper-zoom-container">
+          <img src="${src}" draggable="false" />
+        </div>
+      `;
+      wrapper.appendChild(slide);
+    });
+
+    // 初始化 Swiper
+    const swiper = new Swiper('.swiper', {
+      zoom: true, // 啟用雙指縮放
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      spaceBetween: 10,
+      centeredSlides: true,
+      slidesPerView: 1,
+      initialSlide: 0,
+      loop: false,
+      // 可選：滑動時自動還原縮放
+      on: {
+        slideChange: function() {
+          if (this.zoom && this.zoom.out) this.zoom.out();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
